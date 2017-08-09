@@ -12,7 +12,11 @@
           <i class="fa fa-plus"></i>
         </li>
       </ul>
-      <router-link to="/music_player/music_search" tag="div" class="search_button"><i class="fa fa-search"></i>发现</router-link>
+      <div class="search_button" :class="{'isShow': isSearch}" @click.stop="search">
+        <router-link to="/music_player/music_search">
+          <i class="fa fa-search"></i>发现
+        </router-link>
+      </div>
     </div>
     <div class="music_content">
       <router-view></router-view>
@@ -21,7 +25,18 @@
 </template>
 
 <script type="text/ecmascript-6">
-
+export default {
+  data() {
+    return{
+      isSearch: false
+    }
+  },
+  methods: {
+    search: function () {
+      this.isSearch = !this.isSearch
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -62,8 +77,10 @@
       margin: auto;
       font-size: .23rem;
       border-radius: .05rem;
-      color: #ffffff;
       background: #2bad6e;
+      a{
+        color: #ffffff;
+      }
       i{
         margin-right: .1rem;
       }
