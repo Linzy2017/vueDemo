@@ -22,19 +22,23 @@ export default new Router({
       children: [
         {
           path: '',
-          component: resolve => require(['../components/music_player_paging/mine.vue'], resolve)
+          component: resolve => require(['../components/music_player_paging/music_mine.vue'], resolve)
         },
         {
-          path: 'mine',
-          component: resolve => require(['../components/music_player_paging/mine.vue'], resolve)
+          path: 'music_mine',
+          component: resolve => require(['../components/music_player_paging/music_mine.vue'], resolve)
         },
         {
           path: 'music_hall',
           component: resolve => require(['../components/music_player_paging/music_hall.vue'], resolve)
         },
         {
-          path: 'discover',
-          component: resolve => require(['../components/music_player_paging/discover.vue'], resolve)
+          path: 'music_discover',
+          component: resolve => require(['../components/music_player_paging/music_discover.vue'], resolve)
+        },
+        {
+          path: 'music_search',
+          component: resolve => require(['../components/music_player_paging/music_search.vue'], resolve)
         }
       ]
     }
