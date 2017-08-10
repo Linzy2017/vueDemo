@@ -5,7 +5,7 @@
         <li class="icon">
           <i class="fa fa-bars" v-if="!isSearch"></i>
         </li>
-        <router-link to="/music_player/music_mine" tag="li">我的</router-link>
+        <router-link to="/music_player/music_mine" tag="li" class="active">我的</router-link>
         <router-link to="/music_player/music_hall" tag="li">音乐馆</router-link>
         <router-link to="/music_player/music_discover" tag="li">发现</router-link>
         <li class="icon">
@@ -130,6 +130,10 @@ export default {
         &:nth-child(4) {
           margin: 0;
         }
+      }
+      li.active{
+        font-size: .27rem;
+        font-weight: bold;
       }
     }
     .search_button {
