@@ -19,7 +19,7 @@
         <input v-if="isSearch" type="text" placeholder="搜索音乐、歌词、歌单"/>
         <i v-if="isSearch" class="fa fa-microphone"></i>
         <span @click.stop="cancel">
-          <router-link v-if="isSearch" to="/music_player/music_discover" class="search_cancel">取消</router-link>
+          <span v-if="isSearch"  class="search_cancel">取消</span>
         </span>
       </div>
     </div>
@@ -42,8 +42,9 @@ export default {
       this.isSearch = true
       this.firstIn = false
     },
-    cancel:function () {
+    cancel: function () {
       this.isSearch = false
+      history.go(-1);
     }
   }
 }
@@ -134,7 +135,7 @@ export default {
     .search_button {
       position: relative;
       width: 94%;
-      line-height: .5rem;
+      height: .5rem;
       margin-left: 3%;
       font-size: .23rem;
       border-radius: .05rem;
@@ -154,14 +155,14 @@ export default {
       }
       .goToDiscover{
         position: absolute;
-        top: -.28rem;
+        top: .1rem;
         left: 2.6rem;
       }
       a {
         position: relative;
         display: inline-block;
         width: 100%;
-        height: 100%;
+        height: .5rem;
         text-align: center;
         color: #ffffff;
       }
@@ -196,6 +197,7 @@ export default {
         }
       }
       .fa-microphone{
+        margin-top: .1rem;
         opacity: 0;
         animation: opacity_change .25s ease-out .25s;
         animation-fill-mode: forwards;
@@ -235,7 +237,7 @@ export default {
       }
       .search_cancel {
         position: absolute;
-        top: 0;
+        top: .1rem;
         right: -.7rem;
         width: 10%;
       }
