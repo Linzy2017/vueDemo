@@ -5,9 +5,9 @@
         <li class="icon">
           <i class="fa fa-bars" v-if="!isSearch"></i>
         </li>
-        <router-link to="/music_player/music_mine" tag="li" class="active">我的</router-link>
-        <router-link to="/music_player/music_hall" tag="li">音乐馆</router-link>
-        <router-link to="/music_player/music_discover" tag="li">发现</router-link>
+        <router-link to="/music_player/music_mine" tag="li" :class="{'active': pageIndex === 0}">我的</router-link>
+        <router-link to="/music_player/music_hall" tag="li" :class="{'active': pageIndex === 1}">音乐馆</router-link>
+        <router-link to="/music_player/music_discover" tag="li" :class="{'active': pageIndex === 2}">发现</router-link>
         <li class="icon">
           <i class="fa fa-plus" v-if="!isSearch"></i>
         </li>
@@ -35,6 +35,11 @@ export default {
     return{
       firstIn: true,
       isSearch: false
+    }
+  },
+  computed: {
+    pageIndex: function () {
+      return this.$store.state.main_store.page_index
     }
   },
   methods: {
