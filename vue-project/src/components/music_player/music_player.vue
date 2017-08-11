@@ -122,6 +122,7 @@ export default {
       justify-content: center;
       .icon {
         position: absolute;
+        top: .15rem;
         margin: 0;
         font-size: .35rem;
         &:first-child {
@@ -213,6 +214,7 @@ export default {
       }
       .fa-microphone{
         position: absolute;
+        top: .13rem;
         right: 0;
         opacity: 0;
         animation: opacity_change .25s ease-out .25s;
@@ -259,9 +261,12 @@ export default {
       }
     }
   }
+  .music_content{
+    position: absolute;
+    top: 12vh;
+    width: 100%;
+  }
   .music_content > div{
-    padding-top: 11vh;
-    margin-top: .1rem;
   }
 }
 </style>
