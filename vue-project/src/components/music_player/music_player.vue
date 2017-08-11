@@ -80,6 +80,9 @@ export default {
 }
 .music_player {
   .music_hd {
+    position: fixed;
+    left: 0;
+    top: 0;
     width: 100%;
     padding-bottom: .1rem;
     background: #31c27c;
@@ -164,14 +167,14 @@ export default {
       }
       .goToDiscover{
         position: absolute;
-        top: .1rem;
+        top: .07rem;
         left: 2.6rem;
       }
       a {
         position: relative;
         display: inline-block;
         width: 100%;
-        height: .5rem;
+        height:100%;
         text-align: center;
         color: #ffffff;
       }
@@ -193,8 +196,11 @@ export default {
       }
     }
     .search_button_none {
+      display: flex;
+      align-items: center;
       margin-top: .1rem;
       text-align: end;
+      line-height: 4vh;
       animation: input_width_on .5s ease-out;
       animation-fill-mode: forwards;
       @include keyframes(input_width_on) {
@@ -206,7 +212,8 @@ export default {
         }
       }
       .fa-microphone{
-        margin-top: .1rem;
+        position: absolute;
+        right: 0;
         opacity: 0;
         animation: opacity_change .25s ease-out .25s;
         animation-fill-mode: forwards;
@@ -251,6 +258,10 @@ export default {
         width: 10%;
       }
     }
+  }
+  .music_content > div{
+    padding-top: 11vh;
+    margin-top: .1rem;
   }
 }
 </style>
