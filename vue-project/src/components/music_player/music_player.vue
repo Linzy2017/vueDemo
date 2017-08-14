@@ -24,18 +24,27 @@
       </div>
     </div>
     <div class="music_content">
-      <router-view></router-view>
+      <!--下拉刷新框-->
+      <scroller lock-x scrollbar-y ref="scroller" height="-80">
+        <div class="scroller_box">
+          <router-view></router-view>
+        </div>
+      </scroller>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import  { Scroller} from 'vux'
 export default {
   data() {
     return{
       firstIn: true,
       isSearch: false
     }
+  },
+  components: {
+    Scroller
   },
   computed: {
     pageIndex: function () {
@@ -272,6 +281,9 @@ export default {
   .group{
     background: #ffffff;
     margin-bottom: .08rem;
+    &:last-child{
+      margin-bottom: 1rem;
+    }
   }
 }
 </style>
