@@ -1,17 +1,207 @@
 <template>
   <div class="music_mine">
-
+     <!--下拉刷新框-->
+    <scroller lock-x scrollbar-y ref="scroller">
+      <div class="scroller_box">
+          <div class="mine_hd group">
+            <div class="user_hd">
+              <span class="icon_lv"><img src="../../assets/img/music_player/music_mine/icon_lv.png" alt="" ><em>lv6</em><span>39分钟</span></span>
+              <img src="../../assets/img/music_player/music_mine/pic_head.png"  alt="头像"/>
+              <span class="icon_diamonds"><img src="../../assets/img/music_player/music_mine/icon_diamonds.png" alt="">升级为豪华</span>
+            </div>
+            <div class="user_name">---&nbsp;&nbsp;Linzy&nbsp;&nbsp;---</div>
+            <div class="user-vip">
+              <img src="../../assets/img/music_player/music_mine/icon_greenlv1.png" />
+              <img src="../../assets/img/music_player/music_mine/icon_musiclv1.png" />
+            </div>
+            <ul class="select_list">
+              <li>
+                <img src="../../assets/img/music_player/music_mine/icon_symbols.png" />
+                <br/>
+                <strong>全部歌曲</strong>
+                <br/>
+                <span>146</span>
+              </li>
+              <li>
+                <img src="../../assets/img/music_player/music_mine/icon_download.png" />
+                <br/>
+                <strong>下载歌曲</strong>
+                <br/>
+                <span>7</span>
+              </li>
+              <li>
+                <img src="../../assets/img/music_player/music_mine/icon_recently.png" />
+                <br/>
+                <strong>最近播放</strong>
+                <br/>
+                <span>197</span>
+              </li>
+              <li>
+                <img src="../../assets/img/music_player/music_mine/icon_love.png" />
+                <br/>
+                <strong>我喜欢</strong>
+                <br/>
+                <span>12</span>
+              </li>
+              <li>
+                <img src="../../assets/img/music_player/music_mine/icon_mv.png" />
+                <br/>
+                <strong>下载MV</strong>
+                <br/>
+                <span>&nbsp;</span>
+              </li>
+              <li>
+                <img src="../../assets/img/music_player/music_mine/icon_buy.png" />
+                <br/>
+                <strong>已购音乐</strong>
+                <br/>
+                <span>&nbsp;</span>
+              </li>
+            </ul>
+          </div>
+          <ul class="radio_list group">
+            <li v-for="item in radio">
+              <div class="radio_images">
+                <img :src="item.radioImages" alt="">
+              </div>
+              <div class="radio_content">
+                <div class="radio_title">{{item.radioTitle}}</div>
+                <div class="radio_details">{{item.radioContent}}</div>
+              </div>
+            </li>
+          </ul>
+      </div>
+    </scroller>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import  Vue from 'vue'
+  import  { Scroller} from 'vux'
   export default {
-    created(){
+    created() {
       this.$store.commit('PAGE_INDEX',0)
+    },
+    data() {
+      return {
+        radio: [
+          {
+            radioImages: require('../../assets/img/music_player/music_mine/pic_diantai1.png'),
+            radioTitle: '个性电台',
+            radioContent: '来听听专门为你制定的音乐吧'
+          },
+          {
+            radioImages: require('../../assets/img/music_player/music_mine/pic_diantai2.png'),
+            radioTitle: '跑步电台',
+            radioContent: 'QQ音乐×Nike，让运动乐在其中'
+          }
+        ]
+      }
+    },
+    components: {
+      Scroller
+    },
+    methods: {
+        test: function () {
+          this.$vux.alert.show({
+            title: 'Vux is Cool',
+            content: 'Do you agree?',
+            onShow () {
+              console.log('Plugin: I\'m showing')
+            },
+            onHide () {
+              console.log('Plugin: I\'m hiding')
+            }
+          })
+        }
     }
   }
 </script>
 
 <style lang="scss">
-
+.music_mine{
+  .mine_hd{
+    padding-top: .25rem;
+    .user_hd{
+      position: relative;
+      left: .15rem;
+      > img{
+        width: .95rem;
+        height: .95rem;
+        margin: 0 .35rem;
+        vertical-align: middle;
+      }
+      > span {
+        position: relative;
+        display: inline-block;
+        padding: .1rem;
+        border: 1px solid #dedede;
+        border-radius: .3rem;
+        em{
+          position: absolute;
+          left: .25rem;
+          top: .2rem;
+          color: #31c27c;
+        }
+        img{
+          width: .4rem;
+          height: .3rem;
+          margin-right: .05rem;
+        }
+      }
+    }
+    .user_name{
+      margin-top: .2rem;
+      font-size: .35rem;
+    }
+    .user-vip img{
+      margin-top: .1rem;
+      width: .36rem;
+      height: .31rem;
+    }
+    .select_list{
+      margin-top: .4rem;
+      li{
+        display: inline-block;
+        width: 2rem;
+        margin-bottom: .4rem;
+        img{
+          width: .6rem;
+          margin-bottom: .1rem;
+        }
+        strong{
+          font-size: .28rem;
+          font-weight: 500;
+        }
+        span{
+          color: #c7c7c7;
+        }
+      }
+    }
+  }
+  .radio_list{
+    li{
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #dedede;
+      .radio_images{
+        height: 1.1rem;
+        img{
+          width: 1.1rem;
+        }
+      }
+      .radio_content{
+        padding-left: .2rem;
+        text-align: left;
+        .radio_title{
+          font-size: .27rem;
+          font-weight: 600;
+        }
+        .radio_details{
+          color: #cccccc;
+        }
+      }
+    }
+  }
+}
 </style>

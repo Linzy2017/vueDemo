@@ -265,8 +265,13 @@ export default {
     position: absolute;
     top: 12vh;
     width: 100%;
+    background: #dedede;
   }
   .music_content > div{
+  }
+  .group{
+    background: #ffffff;
+    margin-bottom: .08rem;
   }
 }
 </style>
