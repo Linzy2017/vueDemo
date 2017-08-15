@@ -39,15 +39,12 @@
 import  { Scroller} from 'vux'
 export default {
   created() {
-    this.$nextTick(() => {
-      this.$refs.player.style.height = 160/2.47
-    })
   },
   data() {
     return{
       firstIn: true,
       isSearch: false,
-      scrollerHeight: String(-parseInt(htmlFontSize)*2.47)
+      scrollerHeight: String(-parseInt(htmlFontSize)*2.4)
     }
   },
   components: {
@@ -293,7 +290,7 @@ export default {
   }
   .group{
     background: #ffffff;
-    margin-bottom: .08rem;
+    margin-bottom: .04rem;
     &:last-child{
       margin-bottom: 1rem;
     }

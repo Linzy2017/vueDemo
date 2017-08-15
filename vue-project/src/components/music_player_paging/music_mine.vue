@@ -88,6 +88,7 @@
             <div class="group_title">{{item.sheetName}}</div>
             <div class="group_details">{{item.songNum}}</div>
           </div>
+          <i class="fa fa-angle-right"></i>
         </li>
       </ul>
     </div>
@@ -237,6 +238,11 @@
           width: 1.1rem;
         }
       }
+      .fa-angle-right{
+        position: relative;
+        left: -.2rem;
+        font-size: .34rem;
+      }
       .group_content{
         display: flex;
         flex-direction: column;
@@ -265,6 +271,7 @@
       font-weight: 500;
     }
     .sheet_select{
+      border-bottom: 1px solid #dedede;
       > div{
         position: absolute;
         top: .25rem;
