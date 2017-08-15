@@ -25,30 +25,21 @@
     </div>
     <div class="music_content">
       <!--下拉刷新框-->
-      <scroller lock-x scrollbar-y ref="scroller" :height='scrollerHeight'>
-        <div class="scroller_box">
-          <router-view></router-view>
-        </div>
-      </scroller>
+      <router-view></router-view>
     </div>
     <div class="player" @click.stop="test" ref="player"></div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-import  { Scroller} from 'vux'
 export default {
   created() {
   },
   data() {
     return{
       firstIn: true,
-      isSearch: false,
-      scrollerHeight: String(-parseInt(htmlFontSize)*2.4)
+      isSearch: false
     }
-  },
-  components: {
-    Scroller
   },
   computed: {
     pageIndex: function () {
@@ -65,10 +56,6 @@ export default {
       history.go(-1);
     },
     test: function () {
-      this.$nextTick(() => {
-        console.log(this.scrollerHeight)
-        // 打印结果：<li>2</li> 本以为会获得一个数组
-      })
     }
   }
 }
