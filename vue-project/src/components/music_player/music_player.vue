@@ -1,6 +1,7 @@
 <template>
   <div class="music_player">
     <div class="music_hd">
+      <!--点击搜索进入discover页面掩藏导航栏-->
       <ul :class="{'isSearch_on': isSearch,'isSearch_off': !isSearch&&!firstIn}">
         <li class="icon">
           <i class="fa fa-bars" v-if="!isSearch"></i>
@@ -27,7 +28,14 @@
       <!--下拉刷新框-->
       <router-view></router-view>
     </div>
-    <div class="player" @click.stop="test" ref="player"></div>
+    <div class="player" ref="player">
+      <div class="song_img"><img :class="{'pause' : !isPlaying}" :src="songs[playingIndex].songsImg"/></div>
+      <div class="song_mes">{{songs[playingIndex].songsName}}</div>
+      <div class="btn_control playMusic" @click.stop="playMusic" v-if="!isPlaying"><img :src="controlImgSrc[0]"/></div>
+      <div class="btn_control stopMusic" @click.stop="stopMusic" v-if="isPlaying"><img :src=" controlImgSrc[1]"/></div>
+      <div class="btn_historyList"><img src="../../assets/img/music_player/public/music_player_more.png"/></div>
+    </div>
+    <audio :src="songs[playingIndex].mp3Src" ref="musicPlayer" @ended="audioEnd()"></audio>
   </div>
 </template>
 
@@ -38,10 +46,49 @@ export default {
   data() {
     return{
       firstIn: true,
-      isSearch: false
+      isSearch: false,
+      isPlaying:false,
+      playingIndex: 0,
+      controlImgSrc : [
+        require('../../assets/img/music_player/public/icon_play.png'),
+        require('../../assets/img/music_player/public/icon_stop.png')
+      ],
+      songs: [
+        {
+          songsImg: require('../../assets/img/music_player/music_hall/swiper1.jpg'),
+          songsName: '思念是一种病',
+          mp3Src: require('../../assets/mp3/music_1.mp3'),
+        },
+        {
+          songsImg: require('../../assets/img/music_player/music_hall/swiper2.jpg'),
+          songsName: '当我唱起这首歌',
+          mp3Src: require('../../assets/mp3/music_2.mp3'),
+        },
+        {
+          songsImg: require('../../assets/img/music_player/music_hall/swiper3.jpg'),
+          songsName: '小幸运',
+          mp3Src: require('../../assets/mp3/music_3.mp3'),
+        },
+        {
+          songsImg: require('../../assets/img/music_player/music_hall/swiper4.jpg'),
+          songsName: '生活不止眼前的苟且',
+          mp3Src: require('../../assets/mp3/music_4.mp3'),
+        },
+        {
+          songsImg: require('../../assets/img/music_player/music_hall/swiper5.jpg'),
+          songsName: '认真的雪',
+          mp3Src: require('../../assets/mp3/music_5.mp3'),
+        },
+        {
+          songsImg: require('../../assets/img/music_player/music_hall/swiper3.jpg'),
+          songsName: '再见',
+          mp3Src: require('../../assets/mp3/music_6.mp3'),
+        }
+      ]
     }
   },
   computed: {
+    //根据返回的pageIndex实现分页
     pageIndex: function () {
       return this.$store.state.main_store.page_index
     }
@@ -55,8 +102,28 @@ export default {
       this.isSearch = false
       history.go(-1);
     },
-    test: function () {
-    }
+    playMusic(){
+      let audio =this.$refs.musicPlayer;
+      if(!this.isPlaying){
+        audio.play();
+        this.isPlaying = true;
+      }
+    },
+    stopMusic(){
+      let audio =this.$refs.musicPlayer;
+      if(this.isPlaying){
+        audio.pause();
+        this.isPlaying = false;
+      }
+    },
+    audioEnd() {
+      let audio =this.$refs.musicPlayer;
+      let songsLength = this.songs.length;
+      this.playingIndex++;
+      if(this.playingIndex >= songsLength)
+        this.playingIndex = 0;
+      audio.play();
+    },
   }
 }
 </script>
@@ -82,6 +149,14 @@ export default {
   }
   100% {
    opacity: 1;
+  }
+}
+@include keyframes(circle) {
+  0%{
+    transform:rotate(0deg);
+  }
+  100%{
+    transform:rotate(360deg);
   }
 }
 .music_player {
@@ -284,11 +359,39 @@ export default {
     }
   }
   .player{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     position: fixed;
     bottom: 0;
     width: 100%;
     height: 1.1rem;
-    background: #31c27c;
+    background: #f9f8f9;
+    border-top: 1px solid #a9a5a5;
+    .song_img .pause {
+      animation-play-state: paused;
+    }
+    .song_img img{
+      width: .75rem;
+      height: .75rem;
+      margin-left: .1rem;
+      border-radius: 50%;
+      animation:circle 2s infinite linear;
+    }
+    .song_mes{
+      flex-basis: 3.5rem;
+      text-align: left;
+      font-size: .28rem;
+    }
+    .btn_control img{
+      width: .55rem;
+      height: .55rem;
+    }
+    .btn_historyList img{
+      width: .5rem;
+      height: .45rem;
+      margin-right: .2rem;
+    }
   }
 }
 </style>
