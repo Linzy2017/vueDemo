@@ -105,6 +105,7 @@ import  Vue from 'vue'
 export default {
   created() {
     this.$store.commit('PAGE_INDEX',0)
+    console.log(this.scrollerHeight)
   },
   components: {
     Scroller

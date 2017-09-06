@@ -272,6 +272,7 @@ export default {
     top: 12vh;
     width: 100%;
     background: #dedede;
+    overflow: hidden;
   }
   .music_content > div{
   }
