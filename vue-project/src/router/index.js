@@ -38,6 +38,7 @@ export default new Router({
         },
         {
           path: 'music_search',
+          
           component: resolve => require(['../components/music_player_paging/music_search.vue'], resolve)
         }
       ]
