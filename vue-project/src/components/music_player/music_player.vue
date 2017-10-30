@@ -48,16 +48,17 @@
       </div>
     </transition>
     <div class="container">
+      <div class="mask" v-if="isMenu" @click.stop="isMenu = !isMenu"></div>
       <div class="music_hd">
         <!--点击搜索进入discover页面掩藏导航栏-->
         <ul :class="{'isSearch_on': isSearch,'isSearch_off': !isSearch&&!firstIn}">
-          <li class="icon" @click.stop="isMenu = !isMenu;isMask = !isMask">
+          <li class="icon" @click.stop="isMenu = !isMenu">
             <i class="fa fa-bars" v-if="!isSearch"></i>
           </li>
           <router-link to="/music_player/music_mine" tag="li" :class="{'active': pageIndex === 0}">我的</router-link>
           <router-link to="/music_player/music_hall" tag="li" :class="{'active': pageIndex === 1}">音乐馆</router-link>
           <router-link to="/music_player/music_discover" tag="li" :class="{'active': pageIndex === 2}">发现</router-link>
-          <li class="icon"  @click.stop="isAddOther = !isAddOther;isMask = !isMask">
+          <li class="icon">
             <i class="fa fa-plus" v-if="!isSearch"></i>
           </li>
         </ul>
@@ -83,18 +84,6 @@
         <div class="btn_control stopMusic" @click.stop="stopMusic" v-if="isPlaying"><img :src=" controlImgSrc[1]"/></div>
         <div class="btn_historyList"><img src="../../assets/img/music_player/public/music_player_more.png"/></div>
       </div>
-      <div class="mask" v-if="isMask" @click.stop="isMenu = false;isAddOther = false;isMask = !isMask"></div>
-      <div class="add_other" v-if="isAddOther">
-        <div class="item">
-          <img src="../../assets/img/music_player/public/icon_other_listenToRead.png" :width="42 * ratio_PX_to_Rem"/>
-          <span>听歌识曲</span>
-        </div>
-        <div class="item">
-          <img src="../../assets/img/music_player/public/icon_other_scan.png" :width="42 * ratio_PX_to_Rem"/>
-          <span>扫一扫</span>
-        </div>
-        <div class="add_other_arrow"></div>
-      </div>
       <audio :src="songs[playingIndex].mp3Src" ref="musicPlayer" @ended="audioEnd()"></audio>
     </div>
   </div>
@@ -115,8 +104,6 @@ export default {
   },
   data() {
     return{
-      isAddOther: false,
-      isMask: false,
       isMenu: false,
       isTiming: false,
       isOnlyWifi: false,
@@ -256,8 +243,6 @@ body{
   overflow: hidden;
 }
 .music_player {
-  touch-action: auto;
-  user-select: none;
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -557,39 +542,6 @@ body{
         width: .5rem;
         height: .45rem;
         margin-right: .2rem;
-      }
-    }
-    .add_other{
-      z-index: 2;
-      position: absolute;
-      left: 3.5rem;
-      top: .9rem;
-      width: 2.8rem;
-      border-radius: .1rem;
-      background: #ffffff;
-      .item{
-        display: flex;
-        align-items: center;
-        height: .75rem;
-        padding-left: .3rem;
-        font-size: .22rem;
-        border-bottom: 1px solid rgb(238,238,238);
-        &:nth-child(n+2){
-          border: none;
-        }
-        span{
-          margin-left: .2rem;
-        }
-      }
-      .add_other_arrow{
-        position: absolute;
-        right: .05rem;
-        top: -.15rem;
-        width: 0;
-        height: 0;
-        border-right: .25rem solid transparent;
-        border-bottom: .25rem solid #ffffff;
-        border-left: .25rem  solid transparent;
       }
     }
   }
